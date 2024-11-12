@@ -1,12 +1,12 @@
 /*
-_.isEqual is useful when you want to compare complex data types by value not the reference.
+    _.isEqual is useful when you want to compare complex data types by value not the reference.
 
-Can you implement your own version of deep equal isEqual? The lodash version covers a lot of data types. In this problem, you are asked to support :
+    Can you implement your own version of deep equal isEqual? The lodash version covers a lot of data types. In this problem, you are asked to support :
 
-1. primitives
-2. plain objects (object literals)
-3. array
-Objects are compared by their own, not inherited, enumerable properties
+    1. primitives
+    2. plain objects (object literals)
+    3. array
+    Objects are compared by their own, not inherited, enumerable properties
 */
 
 /**
@@ -85,7 +85,3 @@ function isEqual(a, b) {
   console.log(isEqual({a: '1', b:'2'},{b:'2', a: '1', c: '3'}))
   console.log(isEqual({a: '1', b:'2', c: { d: [1, 2]}},{b:'2', a: '1', c: {d: [2, 1]}}))
 
-
-
-
-  
