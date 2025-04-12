@@ -4,10 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        #circle {
+          width: 50px;
+          height: 50px;
+          background: #f74f4f;
+          border-radius: 50%;
+          transition: transform 0.1s ease-out;
+          margin: 100px auto
+        }
+
+        #container {
+          display: flex;
+          align-items: center;
+
+          & > * {
+            margin-right: 10px
+          }
+        }
+      </style>
 </head>
 <body>
-    <button id="record">Start</button>
+    <span id="container">
+        <select id="lang"></select>
+        <button id="record">Start</button>
+    </span>
+    <div id="circle"></div>
     <p id="recorded-text"></p>
-    <script src="./script.js"></script>
+    <script type="module" src="./script.js"></script>
 </body>
 </html>
