@@ -14,13 +14,14 @@ var generateMatrix = function(n) {
     let adx = [0, 1,0, -1]
     let ady = [-1, 0, 1, 0]
 
-    let asend = false;
+
+    let ascend = false;
     let cx = 0, cy = 0, nx, ny, curval = 1;
 
     resArray[0][0] = curval++;
 
     const nextMove = (x, y) => {
-        if (!asend) {
+        if (!ascend) {
             for (let i = 0; i < 4; i++) {
                 let xx = x + dx[i], yy = y + dy[i];
 
@@ -28,7 +29,7 @@ var generateMatrix = function(n) {
                     nx = xx;
                     ny = yy;
 
-                    if (i===3) asend = true;
+                    if (i===3) ascend = true;
                     return true;
                 }
             }
@@ -40,7 +41,7 @@ var generateMatrix = function(n) {
                     nx = xx;
                     ny = yy;
 
-                    if (i!==0) asend = false;
+                    if (i!==0) ascend = false;
                     return true;
                 }
             }
