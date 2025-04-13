@@ -7,6 +7,7 @@ const recordAnimation = document.getElementById("circle");
 recordAnimation.style.display = "none";
 let isRecording = false;
 
+
 // implementing the language selection dropdown
 languages.forEach((language) => {
   const option = document.createElement("option");
@@ -45,6 +46,7 @@ recordButton.addEventListener("click", function () {
     isRecording = false;
     select.disabled = false;
     promptTextParagraph.innerHTML = event.results[0][0].transcript;
+    textToSpeech(event.results[0][0].transcript, select.value);
     console.log("Voice recognition result received:", event);
   };
 
@@ -52,6 +54,39 @@ recordButton.addEventListener("click", function () {
 
   showRecordingAnimation();
 });
+
+const textToSpeech = (text, lang) => {
+    // https://www.youtube.com/watch?v=JFfCDvKiJqU&ab_channel=ColbyFayock
+    loadVoices().then((voices) => {
+      const speech = new SpeechSynthesisUtterance();
+      speech.text = text;
+      speech.lang = lang;
+      speech.voice = voices.find((voice) => voice.lang === lang);
+      console.log(speech.voice);
+      speechSynthesis.speak(speech);
+      console.log("Voices loaded:", voices, lang);
+    // Now you can use them safely
+  });
+//   speech.rate = 1;
+//   speech.pitch = 1;
+//   speech.volume = 1;
+};
+
+function loadVoices() {
+  return new Promise((resolve) => {
+    let voices = speechSynthesis.getVoices();
+
+    if (voices.length) {
+      resolve(voices);
+    } else {
+      // Listen for voiceschanged event
+      speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+        resolve(voices);
+      };
+    }
+  });
+}
 
 const showRecordingAnimation = () => {
   const audioContext = new (window.AudioContext || window.webkitAudioContext)();
