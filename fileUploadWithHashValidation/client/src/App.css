@@ -1,0 +1,87 @@
+#root {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  text-align: left;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.app-header h1 {
+  margin: 0 0 0.4rem;
+  font-size: 2.4rem;
+}
+
+.app-header p {
+  margin: 0;
+  color: #9aa0a6;
+}
+
+.upload-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.file-input {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(100, 108, 255, 0.15);
+  color: #cdd0ff;
+  border: 1px dashed rgba(100, 108, 255, 0.5);
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.file-input input {
+  display: none;
+}
+
+.file-meta {
+  color: #b0b3b8;
+  font-size: 0.95rem;
+}
+
+.upload-button {
+  width: fit-content;
+  padding: 0.65rem 1.6rem;
+  font-size: 1rem;
+  background: #646cff;
+  color: white;
+  border-radius: 10px;
+  border: none;
+}
+
+.upload-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.status {
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+
+.status.success {
+  background: rgba(46, 204, 113, 0.12);
+  border: 1px solid rgba(46, 204, 113, 0.5);
+  color: #a8f3c8;
+}
+
+.status.error {
+  background: rgba(231, 76, 60, 0.12);
+  border: 1px solid rgba(231, 76, 60, 0.5);
+  color: #ffb4ab;
+}
