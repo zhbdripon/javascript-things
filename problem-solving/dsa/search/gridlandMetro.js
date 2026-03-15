@@ -2,6 +2,8 @@
 
 "use strict";
 
+"use strict";
+
 const fs = require("fs");
 
 process.stdin.resume();
@@ -36,27 +38,55 @@ function readLine() {
  */
 
 function gridlandMetro(n, m, k, tracks) {
-  let grid = Array.from({ length: n }, () => Array(m).fill(false));
+  tracks.sort((a, b) => a[0] - b[0]);
+  let prevTrack = [];
+  let exclude = 0;
 
-  for (let track of tracks) {
-    let [r, c1, c2] = track;
-    r -= 1;
-    c1 -= 1;
-    c2 -= 1;
-    for (let i = c1; i <= c2; i++) {
-      grid[r][i] = true;
-    }
-  }
-  let cnt = 0;
-  for (let row of grid) {
-    for (let cell of row) {
-      if (!cell) {
-        cnt += 1;
+  const getRowExclude = (roads) => {
+    roads.sort((a, b) => a[0] - b[0]);
+    let prev = [];
+    let exclu = 0;
+    for (let [ind, road] of roads.entries()) {
+      if (ind === 0) {
+        prev = road;
+        continue;
+      }
+
+      if (road[0] <= prev[1]) {
+        prev = [prev[0], Math.max(road[1], prev[1])];
+      } else {
+        exclu += prev[1] - prev[0] + 1;
+        prev = road;
       }
     }
+
+    if (prev.length > 0) {
+      exclu += prev[1] - prev[0] + 1;
+    }
+
+    return exclu;
+  };
+
+  for (let [ind, track] of tracks.entries()) {
+    if (ind === 0) {
+      prevTrack = [track[0], [[track[1], track[2]]]];
+      continue;
+    }
+
+    if (prevTrack[0] !== track[0]) {
+      exclude += getRowExclude(prevTrack[1]);
+      prevTrack = [track[0], [[track[1], track[2]]]];
+      continue;
+    }
+
+    prevTrack = [track[0], [...prevTrack[1], [track[1], track[2]]]];
   }
 
-  return cnt;
+  if (prevTrack.length > 0) exclude += getRowExclude(prevTrack[1]);
+
+  let res = BigInt(n) * BigInt(m) - BigInt(exclude);
+
+  return res;
 }
 
 function main() {
