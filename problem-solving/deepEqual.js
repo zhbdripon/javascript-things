@@ -52,7 +52,7 @@ function isEqual(a, b) {
       return false;
     }
   
-    for (key of aKeys) {
+    for (let key of aKeys) {
       if (a[key] === a && b[key] === b) { // circular object
         continue;
       }
