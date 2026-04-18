@@ -1,16 +1,24 @@
+// https://leetcode.com/problems/find-peak-element/
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
 var findPeakElement = function(nums) {
-    let left = 0;
-    let right = nums.length - 1;
+    let l = 0, r = nums.length - 1;
+    
+    while(l < r) {
+        console.log(l, r)
+        let mid = Math.floor((l + r) / 2);
+        let midVal = nums[mid];
+        let nextVal = nums[mid+1];
 
-    while (left < right) {
-        let mid = Math.floor((left + right) / 2);
-
-        if (nums[mid] > nums[mid + 1]) {
-            right = mid;      // peak is on left
-        } else {
-            left = mid + 1;   // peak is on right
+        if(midVal > nextVal) {
+            r = mid;
+        }else {
+            l = mid + 1;
         }
     }
 
-    return left;
+    return l; 
 };
