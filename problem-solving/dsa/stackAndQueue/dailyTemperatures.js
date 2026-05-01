@@ -1,3 +1,4 @@
+// https://leetcode.com/problems/daily-temperatures/
 /**
  * @param {number[]} temperatures
  * @return {number[]}
@@ -38,11 +39,9 @@ var dailyTemperatures = function(temperatures) {
     const stack = []; // stores indices
 
     for (let i = 0; i < n; i++) {
-        console.log("outer : ", i, temperatures[i], stack)
         while (stack.length && temperatures[i] > temperatures[stack.at(-1)]) {
             const prev = stack.pop();
             res[prev] = i - prev;
-            console.log(temperatures[i], stack, res)
         }
         stack.push(i);
     }
